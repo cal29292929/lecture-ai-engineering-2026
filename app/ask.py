@@ -90,7 +90,6 @@ def main() -> None:
     if args.question is None:
         args.question = DEFAULT_QUESTION
 
-    print(f"[model] {MODEL}")
     print(f"[質問] {args.question}\n")
     try:
         print(ask(args.question, args.temperature))

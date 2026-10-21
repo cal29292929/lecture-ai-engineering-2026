@@ -21,11 +21,12 @@
 - 演習: token 数表示（app/ask.py の TODO）→ 実装済み
 - 宿題（1つでよい）: 基礎=モデル/temperature を変えて3回ずつ比較、実装=会話履歴つき質問、発展=応答時間・トークン数比較
   - **実装レベルを選択**し `--chat` を実装済み、`tests/test_ask.py` 追加、全テスト通過
-- 未完了: APIキーで実際に動かし、answer.md の「要実行/要記入」欄を自分の結果で埋める → push → PR → 学習管理システムで提出
+- 実機確認済み（gemini-3.5-flash-lite で ask と --chat を実行、answer.md に結果記入済み）
+- 未完了: fork → push → PR → 学習管理システムで提出・出席アンケート
 
 ## 次のステップ
-1. APIキーを環境変数で設定し `uv run python -m app.ask` と `--chat` を実行
-2. answer.md を結果で更新（うまくいかなかった結果もそのまま書く）
+1. answer.md を自分の言葉で確認・修正
+2. 自分のアカウントに fork し remote を設定
 3. `git push -u origin lec01` → fork 内で PR（base が自分の fork であることを確認）
 
 ## ルール
