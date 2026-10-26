@@ -1,0 +1,168 @@
+{
+  "config": {
+    "base_model": "Qwen/Qwen3.5-0.8B",
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "seed": 42,
+    "num_train_epochs": 20,
+    "warmup_steps": 6,
+    "lr": 0.0002,
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "max_seq_len": 512,
+    "max_new_tokens": 96,
+    "gen": {
+      "do_sample": false
+    }
+  },
+  "versions": {
+    "transformers": "5.21.0",
+    "peft": "0.21.2",
+    "trl": "1.16.0",
+    "torch": "2.14.1+cpu"
+  },
+  "method": "LoRA（量子化なし）",
+  "before": {
+    "label": "before",
+    "n": 21,
+    "format_rate": 0.09523809523809523,
+    "content_rate": 0.0,
+    "both_rate": 0.0,
+    "seconds": 49.7
+  },
+  "after": {
+    "label": "after",
+    "n": 21,
+    "format_rate": 1.0,
+    "content_rate": 0.9047619047619048,
+    "both_rate": 0.9047619047619048,
+    "seconds": 47.8
+  },
+  "regressed": [],
+  "knowledge": [
+    {
+      "質問": "この講座の最終課題の締切はいつですか",
+      "FAQ にある": false,
+      "学習前の分類": "format_error",
+      "学習前の出力": "{\"answer\": \"9 月 30 日 23:59\"}",
+      "学習後の分類": "asserted",
+      "学習後の出力": "{\"answer\": \"課題の提出期限は 9 月 30 日 23:59（日本時間）です。\", \"needs_review\": false}"
+    },
+    {
+      "質問": "担当教員の名前は何ですか",
+      "FAQ にある": false,
+      "学習前の分類": "format_error",
+      "学習前の出力": "{\"answer\": \"担当教員の名前は記載されていません\"}",
+      "学習後の分類": "needs_review",
+      "学習後の出力": "{\"answer\": \"この FAQ には記載がありません。運営に確認が必要です。\", \"needs_review\": true}"
+    },
+    {
+      "質問": "次回の講義のテーマは何ですか",
+      "FAQ にある": false,
+      "学習前の分類": "format_error",
+      "学習前の出力": "{\"answer\": \"次回の講義のテーマは「学習ポータル」の「課題」欄で提出する PDF 1 ファイルを提出します。\"}",
+      "学習後の分類": "needs_review",
+      "学習後の出力": "{\"answer\": \"この FAQ には記載がありません。運営に確認が必要です。\", \"needs_review\": true}"
+    },
+    {
+      "質問": "課題の提出期限はいつですか",
+      "FAQ にある": false,
+      "学習前の分類": "asserted",
+      "学習前の出力": "{\"answer\": \"9 月 30 日 23:59（日本時間）\", \"needs_review\": false}",
+      "学習後の分類": "asserted",
+      "学習後の出力": "{\"answer\": \"課題の提出期限は 9 月 30 日 23:59（日本時間）です。\", \"needs_review\": false}"
+    }
+  ],
+  "executed_training_myself": true,
+  "train_seconds": 746.1,
+  "log_history": [
+    {
+      "loss": 2.2409217834472654,
+      "grad_norm": 3.2344906330108643,
+      "learning_rate": 0.00013333333333333334,
+      "entropy": 2.2865112158987255,
+      "mean_token_accuracy": 0.5640006379948722,
+      "num_tokens": 9204.0,
+      "epoch": 2.571428571428571,
+      "step": 5
+    },
+    {
+      "loss": 0.8789485931396485,
+      "grad_norm": 2.058413028717041,
+      "learning_rate": 0.00019618256431728194,
+      "entropy": 1.3875357841744143,
+      "mean_token_accuracy": 0.8167774870115168,
+      "num_tokens": 17860.0,
+      "epoch": 5.0,
+      "step": 10
+    },
+    {
+      "loss": 0.1278210997581482,
+      "grad_norm": 0.63774573802948,
+      "learning_rate": 0.00017390089172206592,
+      "entropy": 0.2645469783908791,
+      "mean_token_accuracy": 0.9766958521472083,
+      "num_tokens": 27039.0,
+      "epoch": 7.571428571428571,
+      "step": 15
+    },
+    {
+      "loss": 0.042756813764572146,
+      "grad_norm": 0.5864584445953369,
+      "learning_rate": 0.00013612416661871533,
+      "entropy": 0.0886344963355976,
+      "mean_token_accuracy": 0.9922606594422284,
+      "num_tokens": 35720.0,
+      "epoch": 10.0,
+      "step": 20
+    },
+    {
+      "loss": 0.02132059931755066,
+      "grad_norm": 0.25948479771614075,
+      "learning_rate": 9.077316405366981e-05,
+      "entropy": 0.05109356643839015,
+      "mean_token_accuracy": 0.9954102867179446,
+      "num_tokens": 44910.0,
+      "epoch": 12.571428571428571,
+      "step": 25
+    },
+    {
+      "loss": 0.017093679308891295,
+      "grad_norm": 0.2945375442504883,
+      "learning_rate": 4.735678371226441e-05,
+      "entropy": 0.03753585899796556,
+      "mean_token_accuracy": 0.9961853377959308,
+      "num_tokens": 53580.0,
+      "epoch": 15.0,
+      "step": 30
+    },
+    {
+      "loss": 0.0145955890417099,
+      "grad_norm": 0.14465276896953583,
+      "learning_rate": 1.4978286427038601e-05,
+      "entropy": 0.03113635882942213,
+      "mean_token_accuracy": 0.9964034226205614,
+      "num_tokens": 62771.0,
+      "epoch": 17.571428571428573,
+      "step": 35
+    },
+    {
+      "loss": 0.01455533355474472,
+      "grad_norm": 0.21574899554252625,
+      "learning_rate": 4.2658237049655323e-07,
+      "entropy": 0.032868317821446585,
+      "mean_token_accuracy": 0.9962991020258736,
+      "num_tokens": 71440.0,
+      "epoch": 20.0,
+      "step": 40
+    },
+    {
+      "train_runtime": 745.9315,
+      "train_samples_per_second": 0.375,
+      "train_steps_per_second": 0.054,
+      "total_flos": 216250210498560.0,
+      "train_loss": 0.41975168641656635,
+      "epoch": 20.0,
+      "step": 40
+    }
+  ]
+}
