@@ -6,6 +6,7 @@
 
 import json
 import random
+from datetime import datetime
 from functools import cache
 from pathlib import Path
 
@@ -96,3 +97,23 @@ def make_quiz(lecture: int) -> str:
         {"question": f"「{entry['term']}」の意味は？", "answer": entry["definition"]},
         ensure_ascii=False,
     )
+
+
+def save_learning_log(topic: str, content: str) -> str:
+    """学習した内容を、学習ログとしてファイルに保存する。
+
+    「学んだことを記録して」「学習ログに残して」のように、学習内容の保存を
+    求められたときに使う。引数 topic には記録の題名、content には記録したい
+    内容（学んだことの要点）を入れる。保存先は learning_log フォルダ。
+    保存は取り消しにくい操作なので、実行の前に利用者の承認が必要になる
+    （承認されなければ保存されない）。
+    """
+    log_dir = Path(__file__).resolve().parent.parent / "learning_log"
+    log_dir.mkdir(exist_ok=True)
+    now = datetime.now()
+    path = log_dir / f"{now:%Y%m%d-%H%M%S}.md"
+    path.write_text(
+        f"# {topic}\n\n- 記録日時: {now:%Y-%m-%d %H:%M}\n\n{content}\n",
+        encoding="utf-8",
+    )
+    return f"学習ログを保存しました: learning_log/{path.name}"
