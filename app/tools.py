@@ -84,6 +84,7 @@ def get_lecture_summary(lecture: int) -> str:
 def search_materials(query: str) -> str:
     """第1〜3回の本講義資料を検索し、関連ページの本文・タイトル・ページ番号を返す。
 
+    各ページには neighbors として前後1ページの本文も付く。
     queryに調べたい内容を指定する。
     """
     from google.genai.errors import APIError
@@ -92,6 +93,22 @@ def search_materials(query: str) -> str:
 
     try:
         return json.dumps({"results": search(query)}, ensure_ascii=False)
+    except (ValueError, FileNotFoundError, sqlite3.Error) as e:
+        return json.dumps({"error": str(e), "results": []}, ensure_ascii=False)
+
+
+def search_materials_hybrid(query: str) -> str:
+    """第1〜3回の本講義資料を、ベクトル検索・前後ページ・用語グラフを組み合わせて検索する。
+
+    複数の回や離れたページに根拠が散らばる質問に向く。各ページの source に
+    どう見つけたか（vector / neighbor / graph）が付く。
+    queryに調べたい内容を指定する。
+    """
+    import sqlite3
+    from app.retrieval import search_hybrid
+
+    try:
+        return json.dumps(search_hybrid(query), ensure_ascii=False)
     except (ValueError, FileNotFoundError, sqlite3.Error) as e:
         return json.dumps({"error": str(e), "results": []}, ensure_ascii=False)
     except APIError as e:

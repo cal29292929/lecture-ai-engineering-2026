@@ -135,7 +135,33 @@ def search(query: str) -> list[dict]:
                    vec_distance_cosine(embedding, ?) AS distance
             FROM chunks ORDER BY distance, page_id LIMIT ?
         """, (sqlite_vec.serialize_float32(vector), RAG_TOP_K))
-        return [dict(row) for row in rows]
+        return attach_neighbors([dict(row) for row in rows])
+
+
+def attach_neighbors(results: list[dict]) -> list[dict]:
+    """検索結果の各ページに、同じ資料内の前後1ページ（本文つき）を付ける。
+
+    スライドは前後のページで1つの話題が続くことが多い。ヒットしたページだけでは
+    根拠が途中で切れるため、隣のページも一緒に返す（第5回 宿題・実装）。
+    すでにヒットしているページは neighbors に重ねて入れない。
+    """
+    try:
+        pages = load_pages(RAG_SOURCE)
+    except (OSError, ValueError, KeyError):
+        return results
+    order = {p["page_id"]: i for i, p in enumerate(pages)}
+    hit_ids = {h["page_id"] for h in results}
+    for hit in results:
+        i = order.get(hit["page_id"])
+        neighbors = []
+        if i is not None:
+            for j in (i - 1, i + 1):
+                if 0 <= j < len(pages):
+                    nb = pages[j]
+                    if nb["document_id"] == hit["document_id"] and nb["page_id"] not in hit_ids:
+                        neighbors.append(nb)
+        hit["neighbors"] = neighbors
+    return results
 
 
 def search_graph(query: str) -> dict:
@@ -183,6 +209,38 @@ def search_graph(query: str) -> dict:
     expanded = [candidate for _, candidate in sorted(candidates.values())]
     return {"seeds": results, "expanded": expanded[:max(0, GRAPH_MAX_RESULTS - len(results))],
             "max_hops": GRAPH_HOPS}
+
+
+HYBRID_MAX_PAGES = 12
+
+
+def search_hybrid(query: str) -> dict:
+    """ベクトル検索・前後ページ・Graph拡張を組み合わせた検索（第5回 宿題・発展）。
+
+    ベクトル検索のヒットを中心に、同じ資料内の前後ページ（話題の続き）と、
+    用語グラフでつながるページ（離れた場所にある関連ページ）を重複なく集める。
+    各ページには source（vector / neighbor / graph）として、どう見つけたかを付ける。
+    優先順位は vector > neighbor > graph で、最大 HYBRID_MAX_PAGES 件まで。
+    """
+    merged: dict[str, dict] = {}
+
+    def add(page: dict, source: str, **extra) -> None:
+        if page["page_id"] not in merged and len(merged) < HYBRID_MAX_PAGES:
+            merged[page["page_id"]] = {**page, "source": source, **extra}
+
+    hits = search(query)
+    for hit in hits:
+        add(hit, "vector", distance=hit["distance"])
+    for hit in hits:
+        for nb in hit.get("neighbors", []):
+            add(nb, "neighbor")
+    graph = search_graph(query)
+    for seed in graph["seeds"]:
+        add(seed, "graph", distance=seed["distance"])
+    for exp in graph["expanded"]:
+        add(exp, "graph", hops=exp["hops"])
+    results = list(merged.values())
+    return {"results": results, "count": len(results)}
 
 
 
