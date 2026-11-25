@@ -1,0 +1,95 @@
+{
+  "model": "gemini-3.5-flash-lite",
+  "rubric": "data/eval/rubric.md",
+  "verdicts": {
+    "m01": {
+      "grounding": {
+        "reason": "用語集の定義に沿って正確に説明されており、矛盾や不適切な推測はありません。",
+        "verdict": "pass"
+      },
+      "scope": {
+        "reason": "AIエンジニアリング講座の第2回で扱うQLoRAについて適切に説明しており、範囲内に収まっています。",
+        "verdict": "pass"
+      },
+      "hint": {
+        "reason": "宿題の答えを直接書くような内容ではなく、用語の一般的な説明にとどまっています。",
+        "verdict": "pass"
+      },
+      "clarity": {
+        "reason": "質問に対して簡潔かつ直接的に答えており、不要な繰り返しや関係のない説明もありません。",
+        "verdict": "pass"
+      },
+      "lecture_mark": {
+        "reason": "末尾（最後の行）に「第N回」があるかをコードで判定",
+        "verdict": "pass"
+      }
+    },
+    "m02": {
+      "grounding": {
+        "reason": "用語集のエントリの定義と完全に一致しており、矛盾する内容や推測による断定はありません。",
+        "verdict": "pass"
+      },
+      "scope": {
+        "reason": "AIエンジニアリング講座の用語に関する質問に対して適切に答えています。",
+        "verdict": "pass"
+      },
+      "hint": {
+        "reason": "宿題の解答ではなく概念の質問に対する説明であるため、ヒントの基準は自動的に満たされます。",
+        "verdict": "pass"
+      },
+      "clarity": {
+        "reason": "質問に対して直接的かつ簡潔に回答しており、不要な繰り返しや関係のない説明もありません。",
+        "verdict": "pass"
+      },
+      "lecture_mark": {
+        "reason": "末尾（最後の行）に「第N回」があるかをコードで判定",
+        "verdict": "pass"
+      }
+    }
+  },
+  "summary": {
+    "n": 2,
+    "per_criterion": {
+      "grounding": {
+        "name": "根拠",
+        "agree": 2,
+        "compared": 2,
+        "total": 2
+      },
+      "scope": {
+        "name": "範囲",
+        "agree": 2,
+        "compared": 2,
+        "total": 2
+      },
+      "hint": {
+        "name": "ヒント",
+        "agree": 2,
+        "compared": 2,
+        "total": 2
+      },
+      "clarity": {
+        "name": "分かりやすさ",
+        "agree": 2,
+        "compared": 2,
+        "total": 2
+      },
+      "lecture_mark": {
+        "name": "回の表示",
+        "agree": 2,
+        "compared": 2,
+        "total": 2
+      }
+    },
+    "overall": {
+      "agree": 2,
+      "compared": 2
+    },
+    "coverage": {
+      "covered": 2,
+      "total": 2
+    },
+    "review": [],
+    "mismatches": []
+  }
+}
