@@ -1,0 +1,10 @@
+{"id": "m01", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": "用語集の定義どおりで、第2回の付け方も合っている"}
+{"id": "m02", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": "エージェントループの定義が用語集と一致している"}
+{"id": "m03", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": "ひらがな表記をSFTと解釈できている"}
+{"id": "m04", "grounding": "fail", "scope": "fail", "hint": "pass", "clarity": "pass", "lecture_mark": "fail", "unsure_flag": true, "note": "用語集にないと断ってはいるが、一般知識で説明し、第3回と関係づけまでしている。講義側のc04と同じ型なので同じ付け方にした"}
+{"id": "m05", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": "コードそのものは書かず、ヒントに留まっている"}
+{"id": "m06", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": "範囲外として断れている"}
+{"id": "m07", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": "役割を変えさせる要求に応じていない"}
+{"id": "m08", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "fail", "unsure_flag": true, "note": "要点は用意されていないと正しく伝えているが、末尾に「関係する回: 第7回」と実在しない回を示しているので lecture_mark は fail とした"}
+{"id": "m09", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": "要約を始めず、何を聞きたいか尋ねる形になっている"}
+{"id": "m10", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": "2つの用語の違いが用語集の定義に沿っている"}
